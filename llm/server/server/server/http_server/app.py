@@ -46,14 +46,14 @@ def create_openai_adapter():
 @app.post("/v1/completions")
 def openai_v1_completions(request: Union[Dict, Req]):
     if isinstance(request, Req) or _is_Req(request):
-        return create_completion(request)
+        return create_completion(Req(**request))
     elif isinstance(request, dict):
         return create_openai_completion(request, chat_interface=False)
 
 @app.post("/v1/chat/completions")
 def openai_v1_chat_completions(request: Union[Dict, Req]):
     if isinstance(request, Req) or _is_Req(request):
-        return create_completion(request)
+        return create_completion(Req(**request))
     elif isinstance(request, dict):
         return create_openai_completion(request, chat_interface=True)
 
